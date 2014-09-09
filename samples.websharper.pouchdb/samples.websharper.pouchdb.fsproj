@@ -117,9 +117,14 @@
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.CodeMirror">
       <HintPath>..\packages\WebSharper.CodeMirror.2.5.87.182\lib\net40\IntelliFactory.WebSharper.CodeMirror.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="IntelliFactory.WebSharper.Piglets">
       <HintPath>..\packages\WebSharper.Piglets.0.1.96.155\lib\net40\IntelliFactory.WebSharper.Piglets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IntelliFactory.WebSharper.PouchDB">
+      <HintPath>..\packages\WebSharper.PouchDB.2.5.1.1\lib\net40\IntelliFactory.WebSharper.PouchDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
