@@ -123,6 +123,10 @@
       <HintPath>..\packages\WebSharper.Piglets.0.1.96.155\lib\net40\IntelliFactory.WebSharper.Piglets.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IntelliFactory.WebSharper.PouchDB">
+      <HintPath>..\packages\WebSharper.PouchDB.2.5.1.1\lib\net40\IntelliFactory.WebSharper.PouchDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
