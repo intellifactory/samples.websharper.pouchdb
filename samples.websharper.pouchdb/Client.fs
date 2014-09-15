@@ -46,6 +46,33 @@ module Client =
 
     let mkSnippet lang code = { Language = lang; Code = code }
 
+    module Defaults =
+        let codes =
+            [
+                Haskell, "fibs :: [Integer]\n\
+                          fibs = 0 : scanl (+) 1 fibs\n\
+                          \n\
+                          main = print (take 10 fibs)\n"
+                Scala, "object Main extends App {\n\
+                        \tval fibs: Stream[BigInt] = BigInt(0) #:: fibs.scan(BigInt(1))(_ + _)\n\
+                        \tfibs take 10 foreach println\n\
+                        }\n"                
+            ]
+
+        let PopulateDb (db : PouchDB<Snippet>) =
+            async {
+                let! info = db.Info().ToAsync()
+                if info.Doc_count = 0 then
+                    return!
+                        codes
+                        |> List.map (function
+                                        | l, c -> db.Put((mkSnippet l c), string <| EcmaScript.Date.Now()).ToAsync())
+                        |> Async.Parallel
+                else
+                    return [||]
+            }
+            |*> ignore
+
     let Languages s =
         [
             Haskell
@@ -74,7 +101,7 @@ module Client =
         ]
 
     let AccordionId = "accordion"
-    let Accordion = Div [ Attr.Id AccordionId; Attr.Class "panel-group" ]
+    let Accordions = Div [ Attr.Id AccordionId; Attr.Class "panel-group" ]
 
     let SnippetToString (ann : Snippet) (d : EcmaScript.Date) =
         LangName ann.Language + " - " + d.ToLocaleString()
@@ -101,7 +128,6 @@ module Client =
                     |> Piglet.Map (cnst l)
         }
         |> Piglet.Run (fun x ->
-            JavaScript.Log x
             cm |> Option.iter (fun c ->
                 c.SetOption("mode", LangMode x.Language)
             )
@@ -115,7 +141,7 @@ module Client =
                     MkPanel (string d) AccordionId title (CodePre res.Code)
                     |> List.rev
                     |> List.iter (fun el -> 
-                        JQuery.Of(Accordion.Dom)
+                        JQuery.Of(Accordions.Dom)
                             .Prepend(el.Dom)
                             .Ready(fun () -> (el :> IPagelet).Render())
                             .Ignore)
@@ -128,6 +154,7 @@ module Client =
             cm <- Some c
 
             let submit = Controls.Submit submitter
+            submit.AddClass("btn btn-primary")
 
             Div [ Attr.Class "form-horizontal" ] -< [
                 y.Chooser (fun stream ->
@@ -151,7 +178,7 @@ module Client =
             ]
         )
 
-    let RenderAnnouncements =
+    let RenderSnippets =
         async {
             let! docs =
                 db.AllDocs(AllDocsCfg(Include_docs = true, Descending = true)).ToAsync()
@@ -164,20 +191,22 @@ module Client =
                 |> List.concat
         }
 
-    let RefreshAnnouncements (container : Element) =
-        RenderAnnouncements
+    let RefreshSnippets (container : Element) =
+        RenderSnippets
         |*> List.iter (fun a -> container.Append a)
         |> Async.Start
 
     let Main =
+        async {
+            do! Defaults.PopulateDb db
+            let container =
+                Div [ Attr.Style "margin: 0 auto; width: 50%; min-width: 400px" ] -< [
+                    AdderPiglet
+                    Accordions
+                ]
+            RefreshSnippets Accordions
 
-        let container =
-            Div [ Attr.Style "margin: 0 auto; width: 50%; min-width: 200px" ] -< [
-                AdderPiglet
-                Accordion
-            ]
-        RefreshAnnouncements Accordion
-
-        container.AppendTo("container")
-
+            container.AppendTo("container")
+        }
+        |> Async.Start
         
