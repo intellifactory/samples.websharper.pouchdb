@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "samples.websharper.pouchdb", "samples.websharper.pouchdb\samples.websharper.pouchdb.fsproj", "{CDBABEDE-BD63-4A55-8CA4-7EEE7FA261DB}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Samples.PouchDB", "WebSharper.Samples.PouchDB\WebSharper.Samples.PouchDB.fsproj", "{CDBABEDE-BD63-4A55-8CA4-7EEE7FA261DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

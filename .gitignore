@@ -1,5 +1,5 @@
-samples.websharper.pouchdb/bin/*
+WebSharper.Samples.PouchDB/bin/*
 packages/*
-samples.websharper.pouchdb/obj/*
+WebSharper.Samples.PouchDB/obj/*
 *.suo
-samples.websharper.pouchdb/Content/*
+WebSharper.Samples.PouchDB/Content/*

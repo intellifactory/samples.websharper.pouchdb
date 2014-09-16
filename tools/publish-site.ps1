@@ -2,8 +2,8 @@
 rm -r build -errorAction ignore
 $d = mkdir build
 $d = mkdir build/html
-cp -r samples.websharper.pouchdb/Content build/html/
-cp -r samples.websharper.pouchdb/*.css build/html/
-cp -r samples.websharper.pouchdb/*.html build/html/
-cp -r samples.websharper.pouchdb/*.png build/html/
-cp -r samples.websharper.pouchdb/google-code-prettify build/html/
+cp -r WebSharper.Samples.PouchDB/Content build/html/
+cp -r WebSharper.Samples.PouchDB/*.css build/html/
+cp -r WebSharper.Samples.PouchDB/*.html build/html/
+cp -r WebSharper.Samples.PouchDB/*.png build/html/
+cp -r WebSharper.Samples.PouchDB/google-code-prettify build/html/
