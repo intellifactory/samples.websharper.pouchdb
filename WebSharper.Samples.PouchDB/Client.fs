@@ -25,18 +25,6 @@ open IntelliFactory.WebSharper.CodeMirror
 [<JavaScript>]
 module Client =
 
-    type System.String with
-        member x.StripMargin(sep : string) =
-            x.Split('\r', '\n')
-            |> Array.map (fun l ->
-                let n = l.IndexOf(sep)
-                if n >= 0 then
-                    l.Substring(n + 1)
-                else
-                    l
-            )
-            |> String.concat "\n"
-
     type Language =
         | Haskell
         | Scala

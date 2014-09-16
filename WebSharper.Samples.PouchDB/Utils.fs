@@ -19,6 +19,18 @@ module Utils =
             return fn a
         }
 
+    type System.String with
+        member x.StripMargin(sep : string) =
+            x.Split('\r', '\n')
+            |> Array.map (fun l ->
+                let n = l.IndexOf(sep)
+                if n >= 0 then
+                    l.Substring(n + 1)
+                else
+                    l
+            )
+            |> String.concat "\n"
+
     let cnst a _ = a
     let flip f a b = f b a
 
