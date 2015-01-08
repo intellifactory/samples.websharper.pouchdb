@@ -2,8 +2,9 @@
 
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.Html
+open IntelliFactory.WebSharper.Html.Client
 open IntelliFactory.WebSharper.PouchDB
+open IntelliFactory.WebSharper.JavaScript
 
 [<JavaScript; AutoOpen>]
 module Utils =

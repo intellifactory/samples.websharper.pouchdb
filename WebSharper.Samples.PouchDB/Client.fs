@@ -2,8 +2,8 @@ namespace WebSharper.Samples.PouchDB
 
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.Html
-open IntelliFactory.WebSharper.Html5
+open IntelliFactory.WebSharper.Html.Client
+open IntelliFactory.WebSharper.JavaScript
 open IntelliFactory.WebSharper.PouchDB
 open IntelliFactory.WebSharper.Piglets
 open IntelliFactory.WebSharper.CodeMirror
@@ -19,9 +19,9 @@ open IntelliFactory.WebSharper.CodeMirror
 [<Require(typeof<MLPrettifyer>)>]
 
 [<Require(typeof<CodeMirror.Resources.Modes.Haskell>)>]
-[<Require(typeof<CodeMirror.Resources.Modes.OCaml>)>]
-[<Require(typeof<CodeMirror.Resources.Modes.CLike>)>]
-[<Require(typeof<CodeMirror.Resources.Modes.JavaScript>)>]
+[<Require(typeof<CodeMirror.Resources.Modes.Mllike>)>]
+[<Require(typeof<CodeMirror.Resources.Modes.Clike>)>]
+[<Require(typeof<CodeMirror.Resources.Modes.Javascript>)>]
 [<JavaScript>]
 module Client =
 
@@ -85,7 +85,7 @@ module Client =
                     return!
                         codes
                         |> List.map (function
-                                        | l, c -> db.Put((mkSnippet l c), string <| EcmaScript.Date.Now()).ToAsync())
+                                        | l, c -> db.Put((mkSnippet l c), string <| Date.Now()).ToAsync())
                         |> Async.Parallel
                 else
                     return [||]
@@ -102,9 +102,9 @@ module Client =
 
     let db = new PouchDB<Snippet>("snippetdb")
 
-    let Data = HTML5.Attr.Data
+    let Data = Attr.Data
 
-    let MkPanel (id : string) (parent : string) (title : string) (body : #IPagelet) =
+    let MkPanel (id : string) (parent : string) (title : string) (body : Pagelet) =
         [
             Div [ Attr.Class "panel-heading" ] -< [
                 H4 [ Attr.Class "panel-title" ] -< [
@@ -123,7 +123,7 @@ module Client =
     let AccordionId = "accordion"
     let Accordions = Div [ Attr.Id AccordionId; Attr.Class "panel-group" ]
 
-    let SnippetToString (ann : Snippet) (d : EcmaScript.Date) =
+    let SnippetToString (ann : Snippet) (d : Date) =
         LangName ann.Language + " - " + d.ToLocaleString()
 
     let CodePre (code : string) =
@@ -154,16 +154,16 @@ module Client =
         )
         |> Piglet.WithSubmit
         |> Piglet.Run (fun res ->
-            let d = EcmaScript.Date.Now()
+            let d = Date.Now()
             db.Put(res, d.ToString())
                 .Then(fun _ ->
-                    let title = SnippetToString res (EcmaScript.Date d)
+                    let title = SnippetToString res (Date d)
                     MkPanel (string d) AccordionId title (CodePre res.Code)
                     |> List.rev
                     |> List.iter (fun el -> 
                         JQuery.Of(Accordions.Dom)
                             .Prepend(el.Dom)
-                            .Ready(fun () -> (el :> IPagelet).Render())
+                            .Ready(fun () -> (el :> Pagelet).Render())
                             .Ignore)
                     JQuery.Of(".saved-modal") |> ShowModal) |> ignore
         )
@@ -206,7 +206,7 @@ module Client =
                 docs.Rows
                 |> Array.toList
                 |> List.map (fun a -> 
-                    let title = SnippetToString a.Doc <| EcmaScript.Date(EcmaScript.Global.ParseInt(a.Id, 10))
+                    let title = SnippetToString a.Doc <| Date(JS.ParseInt(a.Id, 10))
                     MkPanel a.Id AccordionId title (CodePre a.Doc.Code))
                 |> List.concat
         }

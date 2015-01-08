@@ -2,7 +2,7 @@
 
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.CodeMirror
-open IntelliFactory.WebSharper.Html
+open IntelliFactory.WebSharper.Html.Client
 open IntelliFactory.WebSharper.Piglets
 
 [<JavaScript>]
