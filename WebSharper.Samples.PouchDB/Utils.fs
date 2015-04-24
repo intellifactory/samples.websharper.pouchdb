@@ -1,10 +1,10 @@
 ﻿namespace WebSharper.Samples.PouchDB
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.Html.Client
-open IntelliFactory.WebSharper.PouchDB
-open IntelliFactory.WebSharper.JavaScript
+open WebSharper
+open WebSharper.JQuery
+open WebSharper.Html.Client
+open WebSharper.PouchDB
+open WebSharper.JavaScript
 
 [<JavaScript; AutoOpen>]
 module Utils =

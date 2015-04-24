@@ -1,6 +1,6 @@
 ﻿namespace WebSharper.Samples.PouchDB
 
-open IntelliFactory.WebSharper
+open WebSharper
 
 [<AutoOpen>]
 module Resources =

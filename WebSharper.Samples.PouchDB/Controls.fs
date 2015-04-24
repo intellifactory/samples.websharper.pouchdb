@@ -1,9 +1,9 @@
 ﻿namespace WebSharper.Samples.PouchDB
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.CodeMirror
-open IntelliFactory.WebSharper.Html.Client
-open IntelliFactory.WebSharper.Piglets
+open WebSharper
+open WebSharper.CodeMirror
+open WebSharper.Html.Client
+open WebSharper.Piglets
 
 [<JavaScript>]
 module Controls =
@@ -18,7 +18,7 @@ module Controls =
 
         let previous = ref false
 
-        stream.SubscribeImmediate <| function
+        stream.Subscribe <| function
             | Success None ->
                 if !previous then
                     container.Clear()

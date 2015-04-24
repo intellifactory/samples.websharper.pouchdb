@@ -1,12 +1,12 @@
 namespace WebSharper.Samples.PouchDB
 
-open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.JQuery
-open IntelliFactory.WebSharper.Html.Client
-open IntelliFactory.WebSharper.JavaScript
-open IntelliFactory.WebSharper.PouchDB
-open IntelliFactory.WebSharper.Piglets
-open IntelliFactory.WebSharper.CodeMirror
+open WebSharper
+open WebSharper.JQuery
+open WebSharper.Html.Client
+open WebSharper.JavaScript
+open WebSharper.PouchDB
+open WebSharper.Piglets
+open WebSharper.CodeMirror
 
 [<Require(typeof<BootstrapCss>)>]
 [<Require(typeof<BootstrapTheme>)>]
