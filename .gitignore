@@ -3,3 +3,4 @@ packages/*
 WebSharper.Samples.PouchDB/obj/*
 *.suo
 WebSharper.Samples.PouchDB/Content/*
+.vs/

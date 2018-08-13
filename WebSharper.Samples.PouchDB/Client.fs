@@ -216,7 +216,8 @@ module Client =
         |*> List.iter (fun a -> container.Append a)
         |> Async.Start
 
-    let Main =
+    [<SPAEntryPoint>]
+    let Main() =
         async {
             do! Defaults.PopulateDb db
             let container =

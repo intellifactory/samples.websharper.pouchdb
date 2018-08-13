@@ -1,17 +1,17 @@
 ﻿namespace WebSharper.Samples.PouchDB
 
 open WebSharper
+open WebSharper.JavaScript
 open WebSharper.JQuery
 open WebSharper.Html.Client
 open WebSharper.PouchDB
-open WebSharper.JavaScript
 
 [<JavaScript; AutoOpen>]
 module Utils =
     type Promise<'a> with
         member x.ToAsync() =
-            Async.FromContinuations(fun (ok, err, _) ->
-                x.Then(ok, err) |> ignore
+            Async.FromContinuations(fun (ok: 'a -> unit, err, _) ->
+                x.Then(As ok, As err) |> ignore
             )
 
     let (|*>) (comp : Async<'a>) (fn : 'a -> 'b)  =
