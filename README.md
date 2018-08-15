@@ -1,4 +1,5 @@
-# websharper.pouchdb [![Build status](https://ci.appveyor.com/api/projects/status/qm5j3uuyt6gbvx0a)](https://ci.appveyor.com/project/Jand42/samples-websharper-pouchdb)
+# websharper.pouchdb [![Build status](https://ci.appveyor.com/api/projects/status/9aylhhrapas584w2?svg=true)](https://ci.appveyor.com/project/IntelliFactory/websharper-pouchdb-samples)
+
 
 
 [Samples][samp] for [WebSharper][ws] bindings for PouchDB.
