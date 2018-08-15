@@ -5,6 +5,6 @@
 
 
 
-[samp]: http://intellifactory.github.io/websharper.pouchdb.samples
-[ws]: http://websharper.com/
+[samp]: https://intellifactory.github.io/websharper.pouchdb.samples
+[ws]: https://websharper.com/
 
